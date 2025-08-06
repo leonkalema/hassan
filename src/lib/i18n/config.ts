@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
 // Supported locales configuration
-export const locales = ['en', 'sv', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'da', 'no', 'fi'] as const;
+export const locales = ['en', 'sv', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'da', 'no', 'fi', 'ja', 'zh'] as const;
 export type Locale = typeof locales[number];
 
 export const defaultLocale: Locale = 'en';
@@ -19,6 +19,8 @@ export const localeNames: Record<Locale, string> = {
   da: 'Dansk',
   no: 'Norsk',
   fi: 'Suomi',
+  ja: '日本語',
+  zh: '中文',
 };
 
 export const localeFlags: Record<Locale, string> = {
@@ -33,6 +35,8 @@ export const localeFlags: Record<Locale, string> = {
   da: '🇩🇰',
   no: '🇳🇴',
   fi: '🇫🇮',
+  ja: '🇯🇵',
+  zh: '🇨🇳'
 };
 
 export const localeRegions: Record<Locale, string> = {
@@ -47,6 +51,8 @@ export const localeRegions: Record<Locale, string> = {
   da: 'DK',
   no: 'NO',
   fi: 'FI',
+  ja: 'JP',
+  zh: 'CN'
 };
 
 // Validate locale
@@ -172,5 +178,17 @@ export const seoConfig: Record<Locale, {
     currency: 'EUR',
     dateFormat: 'DD.MM.YYYY',
     numberFormat: 'fi-FI',
+  },
+  ja: {
+    htmlLang: 'ja-JP',
+    currency: 'JPY',
+    dateFormat: 'YYYY/MM/DD',
+    numberFormat: 'ja-JP',
+  },
+  zh: {
+    htmlLang: 'zh-CN',
+    currency: 'CNY',
+    dateFormat: 'YYYY-MM-DD',
+    numberFormat: 'zh-CN',
   },
 };
