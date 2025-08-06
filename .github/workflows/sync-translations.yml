@@ -20,68 +20,99 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Install Supabase CLI
+      - name: Install dependencies
         run: |
-          npm install -g @supabase/supabase-js
-          npm install -g supabase
+          npm install @supabase/supabase-js
+          
+      - name: Check environment variables
+        run: |
+          if [ -z "${{ secrets.SUPABASE_URL }}" ]; then
+            echo "❌ SUPABASE_URL secret is not set"
+            echo "Please add SUPABASE_URL to your GitHub repository secrets"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" ]; then
+            echo "❌ SUPABASE_SERVICE_ROLE_KEY secret is not set"
+            echo "Please add SUPABASE_SERVICE_ROLE_KEY to your GitHub repository secrets"
+            exit 1
+          fi
+          echo "✅ Environment variables are set"
           
       - name: Upload en.json to Supabase Storage
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          node -e "
+          cat > upload-script.js << 'EOF'
           const { createClient } = require('@supabase/supabase-js');
           const fs = require('fs');
           const crypto = require('crypto');
           
           async function uploadTranslation() {
-            console.log('🚀 Starting translation sync to Supabase Storage...');
-            
-            const supabase = createClient(
-              process.env.SUPABASE_URL,
-              process.env.SUPABASE_SERVICE_ROLE_KEY
-            );
-            
-            // Read the English translation file
-            const enContent = fs.readFileSync('src/data/i18n/translations/en.json', 'utf8');
-            const enData = JSON.parse(enContent);
-            
-            // Generate hash for change detection
-            const contentHash = crypto.createHash('sha256').update(enContent).digest('hex');
-            
-            // Add metadata
-            const fileWithMetadata = {
-              ...enData,
-              _metadata: {
-                hash: contentHash,
-                lastUpdated: new Date().toISOString(),
-                source: 'github-action',
-                version: '1.0.0'
-              }
-            };
-            
-            // Upload to Supabase Storage
-            const filePath = 'translations/en.json';
-            const { data, error } = await supabase.storage
-              .from('translations')
-              .upload(filePath, JSON.stringify(fileWithMetadata, null, 2), {
-                contentType: 'application/json',
-                upsert: true
-              });
+            try {
+              console.log('🚀 Starting translation sync to Supabase Storage...');
               
-            if (error) {
-              console.error('❌ Error uploading to Supabase Storage:', error);
+              // Check if environment variables exist
+              if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+                throw new Error('Missing required environment variables');
+              }
+              
+              const supabase = createClient(
+                process.env.SUPABASE_URL,
+                process.env.SUPABASE_SERVICE_ROLE_KEY
+              );
+              
+              // Check if file exists
+              if (!fs.existsSync('src/data/i18n/translations/en.json')) {
+                throw new Error('en.json file not found');
+              }
+              
+              // Read the English translation file
+              const enContent = fs.readFileSync('src/data/i18n/translations/en.json', 'utf8');
+              const enData = JSON.parse(enContent);
+              
+              // Generate hash for change detection
+              const contentHash = crypto.createHash('sha256').update(enContent).digest('hex');
+              
+              // Add metadata
+              const fileWithMetadata = {
+                ...enData,
+                _metadata: {
+                  hash: contentHash,
+                  lastUpdated: new Date().toISOString(),
+                  source: 'github-action',
+                  version: '1.0.0'
+                }
+              };
+              
+              // Upload to Supabase Storage
+              const filePath = 'translations/en.json';
+              const { data, error } = await supabase.storage
+                .from('translations')
+                .upload(filePath, JSON.stringify(fileWithMetadata, null, 2), {
+                  contentType: 'application/json',
+                  upsert: true
+                });
+                
+              if (error) {
+                console.error('❌ Error uploading to Supabase Storage:', error);
+                throw error;
+              }
+              
+              console.log('✅ Successfully uploaded en.json to Supabase Storage');
+              console.log('📊 File hash:', contentHash);
+              console.log('🔄 Other language translations will be regenerated on-demand');
+              
+            } catch (error) {
+              console.error('💥 Upload failed:', error.message);
               process.exit(1);
             }
-            
-            console.log('✅ Successfully uploaded en.json to Supabase Storage');
-            console.log('📊 File hash:', contentHash);
-            console.log('🔄 Other language translations will be regenerated on-demand');
           }
           
-          uploadTranslation().catch(console.error);
-          "
+          uploadTranslation();
+          EOF
+          
+          node upload-script.js
           
       - name: Verify upload
         env:
