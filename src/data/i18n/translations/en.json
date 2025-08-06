@@ -35,18 +35,20 @@
     "about": "About Us",
     "tours": "Tours",
     "contact": "Contact",
-    "language": "Language"
+    "language": "Language",
+    "travelResponsibly": "Travel Responsibly"
   },
   "home": {
     "hero": {
       "title": "Discover Africa Today",
       "subtitle": "Explore the world with our curated travel experiences",
-      "cta": "Start Your Safari"
+      "cta": "Start Your Journey",
+      "learnMore": "Learn More"
     },
     "featuredDestinations": {
       "title": "Featured Destinations",
       "subtitle": "Discover our most popular travel destinations",
-      "learnMore": "Learn Now"
+      "learnMore": "Learn More"
     },
     "featuredTours": {
       "title": "Featured Tours",
@@ -58,13 +60,17 @@
       "destinations": "Destinations",
       "customers": "Happy Customers",
       "experience": "Years Experience",
-      "guides": "Expertly Guided"
+      "guides": "Expertly Guided",
+      "happyTravelers": "Happy Travelers",
+      "yearsExperience": "Years Experience",
+      "tourPackages": "Tour Packages"
     }
   },
   "footer": {
     "company": "Company",
     "quickLinks": "Quick Links",
     "contact": "Contact",
+    "contactUs": "Contact Us",
     "followUs": "Follow Us",
     "allRightsReserved": "All rights reserved",
     "address": "123 Adventure Street, Travel City, TC 12345",
