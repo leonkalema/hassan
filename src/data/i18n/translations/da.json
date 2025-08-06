@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "locale": "da",
+    "version": "1.0.0",
+    "lastUpdated": "2025-08-06T10:33:49.013Z",
+    "translatedFrom": "en",
+    "translationProvider": "OpenAI",
+    "generatedOnDemand": true
+  },
+  "common": {
+    "home": "Hjem",
+    "about": "Om Os",
+    "tours": "Ture",
+    "contact": "Kontakt",
+    "bookNow": "Book nu",
+    "exploreMore": "Udforsk Mere",
+    "learnMore": "Lær Mere",
+    "readMore": "Læs mere",
+    "currency": "USD",
+    "from": "fra",
+    "duration": "Varighed",
+    "destination": "Destination",
+    "price": "Pris"
+  },
+  "navigation": {
+    "home": "Hjem",
+    "about": "Om os",
+    "tours": "Ture",
+    "contact": "Kontakt",
+    "language": "Sprog"
+  },
+  "home": {
+    "hero": {
+      "title": "Opdag Verden med Os",
+      "subtitle": "Vi er en førende rejsearrangør, der er dedikeret til at skabe uforglemmelige rejseoplevelser. Med over 15 års erfaring skræddersyr vi personlige rejser, der forbinder dig med verdens smukkeste destinationer.",
+      "cta": "Udforsk Ture"
+    },
+    "featuredTours": {
+      "title": "Fremhævede Ture",
+      "viewAll": "Se Alle Ture"
+    },
+    "stats": {
+      "happyTravelers": "Glade Rejsende",
+      "destinations": "Destinationer",
+      "yearsExperience": "Års erfaring",
+      "tourPackages": "Rejsepakker"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Om Explore Adventures",
+      "subtitle": "Lær mere om vores rejse og det passionerede team bag dine uforglemmelige rejseoplevelser."
+    },
+    "story": {
+      "title": "Vores Historie",
+      "founded": "Grundlagt",
+      "teamSize": "Teamstørrelse",
+      "countries": "Lande"
+    },
+    "mission": {
+      "title": "Vores Mission",
+      "explore": {
+        "title": "Udforsk",
+        "description": "Vi tror på den transformerende kraft af rejser og udforskning af nye kulturer."
+      },
+      "connect": {
+        "title": "Forbind",
+        "description": "At skabe meningsfulde forbindelser mellem rejsende og lokale samfund verden over."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Levering af enestående service og uforglemmelige oplevelser på hver rejse."
+      }
+    },
+    "team": {
+      "title": "Mød Vores Team",
+      "subtitle": "Vores passionerede team af rejseeksperter er dedikeret til at skabe ekstraordinære oplevelser for hver rejsende."
+    },
+    "cta": {
+      "title": "Klar til at starte dit eventyr?",
+      "subtitle": "Lad os hjælpe dig med at skabe minder, der vil vare livet ud.",
+      "button": "Udforsk Vore Ture"
+    }
+  },
+  "footer": {
+    "copyright": "Alle rettigheder forbeholdes."
+  },
+  "seo": {
+    "home": {
+      "title": "Hjem | Udforsk Eventyr - Premier Turoperatør",
+      "description": "Opdag fantastiske rejsemål med Explore Adventures. Gennemse vores udvalgte ture, herunder Alpine Adventures, Tropical Paradise og Cultural Journeys."
+    },
+    "about": {
+      "title": "Om Os | Udforsk Eventyr - Vores Historie & Team",
+      "description": "Lær om Explore Adventures, en førsteklasses rejsearrangør grundlagt i 2009. Mød vores erfarne team af over 50 rejseeksperter, der betjener mere end 25 lande verden over."
+    }
+  }
+}

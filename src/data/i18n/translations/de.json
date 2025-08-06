@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "locale": "de",
+    "version": "1.0.0",
+    "lastUpdated": "2025-08-06T10:17:40.519Z",
+    "translatedFrom": "en",
+    "translationProvider": "MiniMax"
+  },
+  "common": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "tours": "Touren",
+    "contact": "Kontakt",
+    "bookNow": "Jetzt buchen",
+    "exploreMore": "Mehr Entdecken",
+    "learnMore": "Mehr erfahren",
+    "readMore": "Mehr erfahren",
+    "currency": "USD",
+    "from": "von",
+    "duration": "Dauer",
+    "destination": "Zielort",
+    "price": "Preis"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "tours": "Touren",
+    "contact": "Kontakt",
+    "language": "Sprache"
+  },
+  "home": {
+    "hero": {
+      "title": "Entdecken Sie die Welt mit uns",
+      "subtitle": "Wir sind ein erstklassiger Reiseveranstalter, der sich der Schaffung unvergesslicher Reiseerlebnisse widmet. Mit über 15 Jahren Erfahrung gestalten wir maßgeschneiderte Reisen, die Sie mit den schönsten Zielen der Welt verbinden.",
+      "cta": "Entdecken Sie Touren"
+    },
+    "featuredTours": {
+      "title": "Empfohlene Touren",
+      "viewAll": "Alle Touren anzeigen"
+    },
+    "stats": {
+      "happyTravelers": "Glückliche Reisende",
+      "destinations": "Reiseziele",
+      "yearsExperience": "Jahre Erfahrung",
+      "tourPackages": "Reiseangebote"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Über Explore Adventures",
+      "subtitle": "Erfahren Sie mehr über unsere Reise und das leidenschaftliche Team hinter Ihren unvergesslichen Reiseerlebnissen."
+    },
+    "story": {
+      "title": "Unsere Geschichte",
+      "founded": "Gegründet",
+      "teamSize": "Teamgröße",
+      "countries": "Länder"
+    },
+    "mission": {
+      "title": "Unsere Mission",
+      "explore": {
+        "title": "Erkunden",
+        "description": "Wir glauben an die transformative Kraft des Reisens und die Erkundung neuer Kulturen."
+      },
+      "connect": {
+        "title": "Verbinden",
+        "description": "Bedeutungsvolle Verbindungen zwischen Reisenden und lokalen Gemeinschaften weltweit schaffen."
+      },
+      "excellence": {
+        "title": "Exzellenz",
+        "description": "Außergewöhnlichen Service und unvergessliche Erlebnisse auf jeder Reise bieten."
+      }
+    },
+    "team": {
+      "title": "Lernen Sie unser Team kennen",
+      "subtitle": "Unser leidenschaftliches Team von Reiseexperten setzt sich dafür ein, außergewöhnliche Erlebnisse für jeden Reisenden zu schaffen."
+    },
+    "cta": {
+      "title": "Bereit, Ihr Abenteuer zu beginnen?",
+      "subtitle": "Lassen Sie uns Ihnen helfen, Erinnerungen zu schaffen, die ein Leben lang halten.",
+      "button": "Entdecken Sie unsere Touren"
+    }
+  },
+  "footer": {
+    "copyright": "Alle Rechte vorbehalten."
+  },
+  "seo": {
+    "home": {
+      "title": "Startseite | Abenteuer Entdecken - Premier Reiseveranstalter",
+      "description": "Entdecken Sie erstaunliche Reiseziele mit Explore Adventures. Durchstöbern Sie unsere vorgestellten Touren, darunter Alpenabenteuer, Tropisches Paradies und Kulturelle Reisen."
+    },
+    "about": {
+      "title": "Über uns | Explore Adventures - Unsere Geschichte & Team",
+      "description": "Erfahren Sie mehr über Explore Adventures, einen erstklassigen Reiseveranstalter, der 2009 gegründet wurde. Lernen Sie unser erfahrenes Team von über 50 Reiseexperten kennen, das in mehr als 25 Ländern weltweit tätig ist."
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "locale": "en",
+    "version": "1.0.0",
+    "lastUpdated": "2024-01-01T00:00:00Z"
+  },
+  "common": {
+    "home": "Home",
+    "about": "About Us",
+    "tours": "Tours",
+    "contact": "Contact",
+    "bookNow": "Book Now",
+    "exploreMore": "Explore More",
+    "learnMore": "Learn More",
+    "readMore": "Read More",
+    "currency": "USD",
+    "from": "from",
+    "duration": "Duration",
+    "destination": "Destination",
+    "price": "Price"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "tours": "Tours",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "home": {
+    "hero": {
+      "title": "Discover the World with Us",
+      "subtitle": "We are a premier tour operator dedicated to creating unforgettable travel experiences. With over 15 years of expertise, we craft personalized journeys that connect you with the world's most beautiful destinations.",
+      "cta": "Explore Tours"
+    },
+    "featuredTours": {
+      "title": "Featured Tours",
+      "viewAll": "View All Tours"
+    },
+    "stats": {
+      "happyTravelers": "Happy Travelers",
+      "destinations": "Destinations",
+      "yearsExperience": "Years Experience",
+      "tourPackages": "Tour Packages"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "About Explore Adventures",
+      "subtitle": "Learn more about our journey and the passionate team behind your unforgettable travel experiences."
+    },
+    "story": {
+      "title": "Our Story",
+      "founded": "Founded",
+      "teamSize": "Team Size",
+      "countries": "Countries"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "explore": {
+        "title": "Explore",
+        "description": "We believe in the transformative power of travel and exploration of new cultures."
+      },
+      "connect": {
+        "title": "Connect",
+        "description": "Building meaningful connections between travelers and local communities worldwide."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Delivering exceptional service and unforgettable experiences on every journey."
+      }
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "Our passionate team of travel experts is dedicated to creating extraordinary experiences for every traveler."
+    },
+    "cta": {
+      "title": "Ready to Start Your Adventure?",
+      "subtitle": "Let us help you create memories that will last a lifetime.",
+      "button": "Explore Our Tours"
+    }
+  },
+  "footer": {
+    "copyright": "All rights reserved."
+  },
+  "seo": {
+    "home": {
+      "title": "Home | Explore Adventures - Premier Tour Operator",
+      "description": "Discover amazing travel destinations with Explore Adventures. Browse our featured tours including Alpine Adventures, Tropical Paradise, and Cultural Journeys."
+    },
+    "about": {
+      "title": "About Us | Explore Adventures - Our Story & Team",
+      "description": "Learn about Explore Adventures, a premier tour operator founded in 2009. Meet our experienced team of 50+ travel experts serving 25+ countries worldwide."
+    }
+  }
+}

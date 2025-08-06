@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "locale": "sv",
+    "version": "1.0.0",
+    "lastUpdated": "2025-08-06T10:16:19.116Z",
+    "translatedFrom": "en",
+    "translationProvider": "MiniMax"
+  },
+  "common": {
+    "home": "Hem",
+    "about": "Om oss",
+    "tours": "Turer",
+    "contact": "Kontakt",
+    "bookNow": "Boka nu",
+    "exploreMore": "Utforska mer",
+    "learnMore": "Läs mer",
+    "readMore": "Läs mer",
+    "currency": "USD",
+    "from": "från",
+    "duration": "Varaktighet",
+    "destination": "Destination",
+    "price": "Pris"
+  },
+  "navigation": {
+    "home": "Hem",
+    "about": "Om oss",
+    "tours": "Turer",
+    "contact": "Kontakt",
+    "language": "Språk"
+  },
+  "home": {
+    "hero": {
+      "title": "Upptäck världen med oss",
+      "subtitle": "Vi är en ledande researrangör som är dedikerad till att skapa oförglömliga reseupplevelser. Med över 15 års erfarenhet skräddarsyr vi personliga resor som kopplar dig till världens vackraste destinationer.",
+      "cta": "Utforska Turer"
+    },
+    "featuredTours": {
+      "title": "Utvalda Turer",
+      "viewAll": "Visa alla turer"
+    },
+    "stats": {
+      "happyTravelers": "Glada Resenärer",
+      "destinations": "Destinationer",
+      "yearsExperience": "Års erfarenhet",
+      "tourPackages": "Resepaket"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Om Explore Adventures",
+      "subtitle": "Lär dig mer om vår resa och det passionerade teamet bakom dina oförglömliga reseupplevelser."
+    },
+    "story": {
+      "title": "Vår Berättelse",
+      "founded": "Grundad",
+      "teamSize": "Teamstorlek",
+      "countries": "Länder"
+    },
+    "mission": {
+      "title": "Vår Mission",
+      "explore": {
+        "title": "Utforska",
+        "description": "Vi tror på den transformerande kraften i resor och utforskning av nya kulturer."
+      },
+      "connect": {
+        "title": "Anslut",
+        "description": "Skapa meningsfulla kopplingar mellan resenärer och lokala samhällen världen över."
+      },
+      "excellence": {
+        "title": "Excellens",
+        "description": "Leverera exceptionell service och oförglömliga upplevelser på varje resa."
+      }
+    },
+    "team": {
+      "title": "Möt Vårt Team",
+      "subtitle": "Vårt passionerade team av reseexperter är dedikerat till att skapa extraordinära upplevelser för varje resenär."
+    },
+    "cta": {
+      "title": "Redo att påbörja ditt äventyr?",
+      "subtitle": "Låt oss hjälpa dig att skapa minnen som varar en livstid.",
+      "button": "Utforska Våra Turer"
+    }
+  },
+  "footer": {
+    "copyright": "Alla rättigheter förbehållna."
+  },
+  "seo": {
+    "home": {
+      "title": "Hem | Utforska Äventyr - Premiär Turoperatör",
+      "description": "Upptäck fantastiska resmål med Explore Adventures. Bläddra bland våra utvalda turer inklusive Alpine Adventures, Tropical Paradise och Cultural Journeys."
+    },
+    "about": {
+      "title": "Om Oss | Utforska Äventyr - Vår Berättelse & Team",
+      "description": "Lär dig mer om Explore Adventures, en ledande researrangör grundad 2009. Möt vårt erfarna team av över 50 reseexperter som betjänar mer än 25 länder världen över."
+    }
+  }
+}

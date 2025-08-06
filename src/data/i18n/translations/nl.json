@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "locale": "nl",
+    "version": "1.0.0",
+    "lastUpdated": "2025-08-06T10:33:57.072Z",
+    "translatedFrom": "en",
+    "translationProvider": "OpenAI",
+    "generatedOnDemand": true
+  },
+  "common": {
+    "home": "Thuis",
+    "about": "Over ons",
+    "tours": "Rondleidingen",
+    "contact": "Contact",
+    "bookNow": "Boek Nu",
+    "exploreMore": "Verken Meer",
+    "learnMore": "Leer Meer",
+    "readMore": "Lees Meer",
+    "currency": "USD",
+    "from": "van",
+    "duration": "Duur",
+    "destination": "Bestemming",
+    "price": "Prijs"
+  },
+  "navigation": {
+    "home": "Thuis",
+    "about": "Over ons",
+    "tours": "Rondleidingen",
+    "contact": "Contact",
+    "language": "Taal"
+  },
+  "home": {
+    "hero": {
+      "title": "Ontdek de wereld met ons",
+      "subtitle": "Wij zijn een toonaangevende touroperator die zich richt op het creëren van onvergetelijke reiservaringen. Met meer dan 15 jaar ervaring ontwerpen we persoonlijke reizen die je verbinden met de mooiste bestemmingen ter wereld.",
+      "cta": "Verken Tours"
+    },
+    "featuredTours": {
+      "title": "Uitgelichte Rondreizen",
+      "viewAll": "Bekijk Alle Tours"
+    },
+    "stats": {
+      "happyTravelers": "Gelukkige Reizigers",
+      "destinations": "Bestemmingen",
+      "yearsExperience": "Jaren ervaring",
+      "tourPackages": "Reispakketten"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Over Explore Adventures",
+      "subtitle": "Leer meer over onze reis en het gepassioneerde team achter jouw onvergetelijke reiservaringen."
+    },
+    "story": {
+      "title": "Ons Verhaal",
+      "founded": "Opgericht",
+      "teamSize": "Teamgrootte",
+      "countries": "Landen"
+    },
+    "mission": {
+      "title": "Onze Missie",
+      "explore": {
+        "title": "Verken",
+        "description": "Wij geloven in de transformerende kracht van reizen en het verkennen van nieuwe culturen."
+      },
+      "connect": {
+        "title": "Verbinden",
+        "description": "Betekenisvolle verbindingen creëren tussen reizigers en lokale gemeenschappen over de hele wereld."
+      },
+      "excellence": {
+        "title": "Uitmuntendheid",
+        "description": "Het leveren van uitzonderlijke service en onvergetelijke ervaringen op elke reis."
+      }
+    },
+    "team": {
+      "title": "Ontmoet Ons Team",
+      "subtitle": "Ons gepassioneerde team van reisspecialisten is toegewijd aan het creëren van buitengewone ervaringen voor elke reiziger."
+    },
+    "cta": {
+      "title": "Klaar om je avontuur te beginnen?",
+      "subtitle": "Laat ons je helpen herinneringen te creëren die een leven lang meegaan.",
+      "button": "Verken Onze Rondreizen"
+    }
+  },
+  "footer": {
+    "copyright": "Alle rechten voorbehouden."
+  },
+  "seo": {
+    "home": {
+      "title": "Home | Verken Avonturen - Premier Reisorganisatie",
+      "description": "Ontdek geweldige reisbestemmingen met Explore Adventures. Bekijk onze aanbevolen rondreizen, waaronder Alpine Adventures, Tropical Paradise en Cultural Journeys."
+    },
+    "about": {
+      "title": "Over Ons | Verken Avonturen - Ons Verhaal & Team",
+      "description": "Leer meer over Explore Adventures, een toonaangevende touroperator opgericht in 2009. Maak kennis met ons ervaren team van meer dan 50 reisexperts die meer dan 25 landen wereldwijd bedienen."
+    }
+  }
+}

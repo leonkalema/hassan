@@ -1,0 +1,90 @@
+{
+  "site": {
+    "name": "Explore Adventures",
+    "url": "https://explore-adventures.com",
+    "logo": "https://explore-adventures.com/logo.png",
+    "description": "Experience unforgettable travel adventures with Explore Adventures. We offer premium tour packages to 25+ destinations worldwide. Book your dream vacation today.",
+    "keywords": "tour operator, travel packages, adventure tours, vacation planning, travel agency, guided tours, international travel",
+    "author": "Explore Adventures",
+    "verification": {
+      "google": "your-google-verification-code"
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Home | Explore Adventures - Premier Tour Operator",
+      "description": "Discover amazing travel destinations with Explore Adventures. Browse our featured tours including Alpine Adventures, Tropical Paradise, and Cultural Journeys.",
+      "openGraph": {
+        "title": "Explore Adventures - Discover the World with Us",
+        "description": "Experience unforgettable travel adventures with our premium tour packages to 25+ destinations worldwide.",
+        "url": "https://explore-adventures.com"
+      }
+    },
+    "about": {
+      "title": "About Us | Explore Adventures - Our Story & Team",
+      "description": "Learn about Explore Adventures, a premier tour operator founded in 2009. Meet our experienced team of 50+ travel experts serving 25+ countries worldwide.",
+      "openGraph": {
+        "title": "About Explore Adventures - Our Story & Expert Team",
+        "description": "Discover the story behind Explore Adventures and meet our passionate team of travel experts dedicated to creating unforgettable experiences.",
+        "url": "https://explore-adventures.com/about"
+      }
+    }
+  },
+  "structuredData": {
+    "organization": {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "Explore Adventures",
+      "description": "We are a premier tour operator dedicated to creating unforgettable travel experiences. With over 15 years of expertise, we craft personalized journeys that connect you with the world's most beautiful destinations.",
+      "url": "https://explore-adventures.com",
+      "logo": "https://explore-adventures.com/logo.png",
+      "foundingDate": "2009",
+      "areaServed": "Worldwide",
+      "serviceType": "Tour Operator",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "2500"
+      }
+    },
+    "aboutPage": {
+      "@context": "https://schema.org",
+      "@type": "AboutPage"
+    }
+  },
+  "socialMedia": {
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Explore Adventures - Premier Tour Operator",
+      "description": "Experience unforgettable travel adventures with Explore Adventures. Premium tour packages worldwide.",
+      "images": ["/og-image.jpg"]
+    },
+    "openGraph": {
+      "type": "website",
+      "locale": "en_US",
+      "url": "https://explore-adventures.com",
+      "siteName": "Explore Adventures",
+      "title": "Explore Adventures - Premier Tour Operator",
+      "description": "Experience unforgettable travel adventures with Explore Adventures. We offer premium tour packages to 25+ destinations worldwide.",
+      "images": [
+        {
+          "url": "/og-image.jpg",
+          "width": 1200,
+          "height": 630,
+          "alt": "Explore Adventures - Tour Operator"
+        }
+      ]
+    }
+  },
+  "robots": {
+    "index": true,
+    "follow": true,
+    "googleBot": {
+      "index": true,
+      "follow": true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  }
+}

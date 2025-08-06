@@ -1,0 +1,62 @@
+{
+  "company": {
+    "name": "Explore Adventures",
+    "tagline": "Discover the World with Us",
+    "description": "We are a premier tour operator dedicated to creating unforgettable travel experiences. With over 15 years of expertise, we craft personalized journeys that connect you with the world's most beautiful destinations.",
+    "founded": "2009",
+    "team_size": "50+ travel experts",
+    "countries_covered": "25+ countries"
+  },
+  "featured_tours": [
+    {
+      "id": 1,
+      "title": "Alpine Adventure",
+      "destination": "Swiss Alps",
+      "duration": "7 days",
+      "price": "$2,499",
+      "image": "/images/alpine.jpg",
+      "description": "Experience breathtaking mountain views and pristine alpine lakes."
+    },
+    {
+      "id": 2,
+      "title": "Tropical Paradise",
+      "destination": "Maldives",
+      "duration": "5 days",
+      "price": "$3,299",
+      "image": "/images/maldives.jpg",
+      "description": "Relax in overwater bungalows with crystal clear waters."
+    },
+    {
+      "id": 3,
+      "title": "Cultural Journey",
+      "destination": "Japan",
+      "duration": "10 days",
+      "price": "$4,199",
+      "image": "/images/japan.jpg",
+      "description": "Immerse yourself in ancient traditions and modern wonders."
+    }
+  ],
+  "stats": {
+    "happy_travelers": "10,000+",
+    "destinations": "25+",
+    "years_experience": "15+",
+    "tour_packages": "100+"
+  },
+  "team": [
+    {
+      "name": "Sarah Johnson",
+      "role": "Founder & CEO",
+      "experience": "15+ years in travel industry"
+    },
+    {
+      "name": "Michael Chen",
+      "role": "Head of Operations",
+      "experience": "12+ years in tour management"
+    },
+    {
+      "name": "Emma Rodriguez",
+      "role": "Travel Specialist",
+      "experience": "8+ years in destination planning"
+    }
+  ]
+}

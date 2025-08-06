@@ -1,0 +1,30 @@
+{
+  "name": "hassan",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "prebuild": "npx tsx scripts/build-translations.ts",
+    "build": "next build",
+    "build:translations": "npx tsx scripts/build-translations.ts",
+    "setup:supabase": "npx tsx scripts/setup-supabase.ts",
+    "deploy:edge-function": "npx tsx scripts/deploy-edge-function.ts",
+    "test:translation": "npx tsx scripts/test-edge-translation.ts",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.53.0",
+    "next": "15.4.5",
+    "react": "^19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

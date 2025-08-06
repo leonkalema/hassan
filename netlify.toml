@@ -1,0 +1,42 @@
+[build]
+  # Build command that includes translation generation
+  command = "npm run build"
+  
+  # Output directory
+  publish = ".next"
+  
+  # Environment variables needed for build
+  [build.environment]
+    NODE_VERSION = "18"
+    NPM_FLAGS = "--prefix=/opt/buildhome/repo"
+
+[functions]
+  # Enable Edge Functions for better performance
+  directory = "netlify/functions"
+
+# Redirect rules for i18n
+[[redirects]]
+  # Root redirect to default locale detection
+  from = "/"
+  to = "/en"
+  status = 302
+  force = false
+
+# Headers for better SEO and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache translation files for better performance
+[[headers]]
+  for = "/api/translate"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, s-maxage=3600"
+
+# Environment variables (set these in Netlify dashboard)
+# OPENAI_API_KEY = "your-openai-api-key-here"
+# NODE_ENV = "production"

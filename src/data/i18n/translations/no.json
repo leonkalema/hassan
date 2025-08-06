@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "locale": "no",
+    "version": "1.0.0",
+    "lastUpdated": "2025-08-06T10:25:05.790Z",
+    "translatedFrom": "en",
+    "translationProvider": "OpenAI",
+    "generatedOnDemand": true
+  },
+  "common": {
+    "home": "Hjem",
+    "about": "Om oss",
+    "tours": "Turer",
+    "contact": "Kontakt",
+    "bookNow": "Bestill nå",
+    "exploreMore": "Utforsk mer",
+    "learnMore": "Lær mer",
+    "readMore": "Les mer",
+    "currency": "USD",
+    "from": "fra",
+    "duration": "Varighet",
+    "destination": "Destinasjon",
+    "price": "Pris"
+  },
+  "navigation": {
+    "home": "Hjem",
+    "about": "Om oss",
+    "tours": "Turer",
+    "contact": "Kontakt",
+    "language": "Språk"
+  },
+  "home": {
+    "hero": {
+      "title": "Oppdag verden med oss",
+      "subtitle": "Vi er en ledende turoperatør som er dedikert til å skape uforglemmelige reiseopplevelser. Med over 15 års erfaring skaper vi skreddersydde reiser som forbinder deg med verdens vakreste destinasjoner.",
+      "cta": "Utforsk Turene"
+    },
+    "featuredTours": {
+      "title": "Utvalgte Turer",
+      "viewAll": "Se Alle Turene"
+    },
+    "stats": {
+      "happyTravelers": "Gledelige Reisende",
+      "destinations": "Destinasjoner",
+      "yearsExperience": "Års erfaring",
+      "tourPackages": "Reisepakker"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Om Explore Adventures",
+      "subtitle": "Lær mer om vår reise og det lidenskapelige teamet bak dine uforglemmelige reiseopplevelser."
+    },
+    "story": {
+      "title": "Vår historie",
+      "founded": "Grunnlagt",
+      "teamSize": "Teamstørrelse",
+      "countries": "Land"
+    },
+    "mission": {
+      "title": "Vår Misjon",
+      "explore": {
+        "title": "Utforsk",
+        "description": "Vi tror på den transformative kraften av reise og utforskning av nye kulturer."
+      },
+      "connect": {
+        "title": "Koble til",
+        "description": "Bygger meningsfulle forbindelser mellom reisende og lokale samfunn over hele verden."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Leverer eksepsjonell service og uforglemmelige opplevelser på hver reise."
+      }
+    },
+    "team": {
+      "title": "Møt Vårt Team",
+      "subtitle": "Vårt lidenskapelige team av reiseeksperter er dedikert til å skape ekstraordinære opplevelser for hver reisende."
+    },
+    "cta": {
+      "title": "Klar for å starte ditt eventyr?",
+      "subtitle": "La oss hjelpe deg med å skape minner som varer livet ut.",
+      "button": "Utforsk Våre Turer"
+    }
+  },
+  "footer": {
+    "copyright": "Alle rettigheter forbeholdt."
+  },
+  "seo": {
+    "home": {
+      "title": "Hjem | Utforsk Eventyr - Førsteklasses Turoperatør",
+      "description": "Oppdag fantastiske reisemål med Explore Adventures. Bla gjennom våre utvalgte turer, inkludert Alpine Adventures, Tropical Paradise og Cultural Journeys."
+    },
+    "about": {
+      "title": "Om Oss | Utforsk Eventyr - Vår Historie & Team",
+      "description": "Lær om Explore Adventures, en ledende turoperatør grunnlagt i 2009. Møt vårt erfarne team av over 50 reiseeksperter som betjener mer enn 25 land over hele verden."
+    }
+  }
+}

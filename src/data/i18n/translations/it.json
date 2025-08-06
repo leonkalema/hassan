@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "locale": "it",
+    "version": "1.0.0",
+    "lastUpdated": "2025-08-06T10:26:13.787Z",
+    "translatedFrom": "en",
+    "translationProvider": "OpenAI",
+    "generatedOnDemand": true
+  },
+  "common": {
+    "home": "Home",
+    "about": "Chi Siamo",
+    "tours": "Tour",
+    "contact": "Contatto",
+    "bookNow": "Prenota Ora",
+    "exploreMore": "Esplora di più",
+    "learnMore": "Scopri di più",
+    "readMore": "Leggi di più",
+    "currency": "USD",
+    "from": "da",
+    "duration": "Durata",
+    "destination": "Destinazione",
+    "price": "Prezzo"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "Chi Siamo",
+    "tours": "Tour",
+    "contact": "Contatto",
+    "language": "Lingua"
+  },
+  "home": {
+    "hero": {
+      "title": "Scopri il Mondo con Noi",
+      "subtitle": "Siamo un operatore turistico di prim'ordine dedicato a creare esperienze di viaggio indimenticabili. Con oltre 15 anni di esperienza, creiamo viaggi personalizzati che ti connettono con le destinazioni più belle del mondo.",
+      "cta": "Esplora Tour"
+    },
+    "featuredTours": {
+      "title": "Tour in Evidenza",
+      "viewAll": "Visualizza Tutti i Tour"
+    },
+    "stats": {
+      "happyTravelers": "Viaggiatori Felici",
+      "destinations": "Destinazioni",
+      "yearsExperience": "Anni di esperienza",
+      "tourPackages": "Pacchetti Turistici"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Informazioni su Explore Adventures",
+      "subtitle": "Scopri di più sul nostro viaggio e sul team appassionato che rende indimenticabili le tue esperienze di viaggio."
+    },
+    "story": {
+      "title": "La Nostra Storia",
+      "founded": "Fondato",
+      "teamSize": "Dimensione del team",
+      "countries": "Paesi"
+    },
+    "mission": {
+      "title": "La nostra missione",
+      "explore": {
+        "title": "Esplora",
+        "description": "Crediamo nel potere trasformativo del viaggio e nell'esplorazione di nuove culture."
+      },
+      "connect": {
+        "title": "Collegati",
+        "description": "Creare connessioni significative tra viaggiatori e comunità locali in tutto il mondo."
+      },
+      "excellence": {
+        "title": "Eccellenza",
+        "description": "Offrendo un servizio eccezionale e esperienze indimenticabili in ogni viaggio."
+      }
+    },
+    "team": {
+      "title": "Incontra il nostro team",
+      "subtitle": "Il nostro appassionato team di esperti di viaggio è dedicato a creare esperienze straordinarie per ogni viaggiatore."
+    },
+    "cta": {
+      "title": "Pronto per iniziare la tua avventura?",
+      "subtitle": "Lasciaci aiutarti a creare ricordi che dureranno per tutta la vita.",
+      "button": "Esplora i Nostri Tour"
+    }
+  },
+  "footer": {
+    "copyright": "Tutti i diritti riservati."
+  },
+  "seo": {
+    "home": {
+      "title": "Home | Esplora Avventure - Operatore Turistico Premier",
+      "description": "Scopri incredibili destinazioni di viaggio con Explore Adventures. Sfoglia i nostri tour in evidenza, tra cui Alpine Adventures, Tropical Paradise e Cultural Journeys."
+    },
+    "about": {
+      "title": "Chi Siamo | Esplora Avventure - La Nostra Storia & Il Nostro Team",
+      "description": "Scopri Explore Adventures, un operatore turistico di prim'ordine fondato nel 2009. Incontra il nostro team esperto di oltre 50 professionisti del viaggio che operano in più di 25 paesi in tutto il mondo."
+    }
+  }
+}
