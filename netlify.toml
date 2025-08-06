@@ -8,7 +8,6 @@
   # Environment variables needed for build
   [build.environment]
     NODE_VERSION = "18"
-    NPM_FLAGS = "--prefix=/opt/buildhome/repo"
 
 [functions]
   # Enable Edge Functions for better performance
