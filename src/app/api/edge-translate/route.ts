@@ -19,17 +19,13 @@ export async function GET(request: NextRequest) {
 
     // Load translation using EdgeTranslator
     const translation = await edgeTranslator.loadTranslation(locale, force);
-    const status = edgeTranslator.getTranslationStatus(locale);
+    const hasCached = edgeTranslator.hasCachedTranslation(locale);
 
     return NextResponse.json({
       success: true,
       locale,
       translation,
-      status: {
-        cached: status.cached,
-        fresh: status.fresh,
-        lastLoaded: status.lastLoaded
-      },
+      cached: hasCached,
       provider: 'edge-translator'
     });
 
@@ -79,7 +75,9 @@ export async function POST(request: NextRequest) {
 // Health check endpoint
 export async function HEAD() {
   try {
-    const isConnected = await edgeTranslator.testConnection();
+    // Test connection by trying to load English translation
+    const testTranslation = await edgeTranslator.loadTranslation('en');
+    const isConnected = testTranslation && testTranslation.meta;
     
     if (isConnected) {
       return new NextResponse(null, { status: 200 });
