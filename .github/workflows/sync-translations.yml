@@ -108,7 +108,7 @@ jobs:
               
               // Upload to Supabase Storage
               console.log('📤 Uploading en.json to Supabase Storage...');
-              const filePath = 'en.json';
+              const filePath = 'data/en.json';
               const { data, error } = await supabase.storage
                 .from('translations')
                 .upload(filePath, JSON.stringify(fileWithMetadata, null, 2), {
