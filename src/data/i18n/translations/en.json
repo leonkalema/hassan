@@ -19,6 +19,17 @@
     "destination": "Destination",
     "price": "Price"
   },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "tours": "Tours",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Discover Amazing Destinations",
+    "subtitle": "Explore the world with our curated travel experiences",
+    "cta": "Start Your Journey"
+  },
   "navigation": {
     "home": "Home",
     "about": "About Us",
@@ -28,20 +39,38 @@
   },
   "home": {
     "hero": {
-      "title": "Discover the World with Us",
-      "subtitle": "We are a premier tour operator dedicated to creating unforgettable travel experiences. With over 15 years of expertise, we craft personalized journeys that connect you with the world's most beautiful destinations.",
-      "cta": "Explore Tours"
+      "title": "Discover Amazing Destinations",
+      "subtitle": "Explore the world with our curated travel experiences",
+      "cta": "Start Your Journey"
+    },
+    "featuredDestinations": {
+      "title": "Featured Destinations",
+      "subtitle": "Discover our most popular travel destinations",
+      "learnMore": "Learn More"
     },
     "featuredTours": {
       "title": "Featured Tours",
       "viewAll": "View All Tours"
     },
     "stats": {
-      "happyTravelers": "Happy Travelers",
+      "title": "Why Choose Us",
+      "subtitle": "Trusted by travelers worldwide",
       "destinations": "Destinations",
-      "yearsExperience": "Years Experience",
-      "tourPackages": "Tour Packages"
+      "customers": "Happy Customers",
+      "experience": "Years Experience",
+      "guides": "Expert Guides"
     }
+  },
+  "footer": {
+    "company": "Company",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "allRightsReserved": "All rights reserved",
+    "address": "123 Adventure Street, Travel City, TC 12345",
+    "phone": "+1 (555) 123-4567",
+    "email": "hello@explore-adventures.com",
+    "copyright": "All rights reserved."
   },
   "about": {
     "hero": {
@@ -78,9 +107,6 @@
       "subtitle": "Let us help you create memories that will last a lifetime.",
       "button": "Explore Our Tours"
     }
-  },
-  "footer": {
-    "copyright": "All rights reserved."
   },
   "seo": {
     "home": {
