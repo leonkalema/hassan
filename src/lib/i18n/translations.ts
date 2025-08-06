@@ -1,8 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { Locale, defaultLocale, isValidLocale } from './config';
-import { SmartTranslator } from '../translation/smart-translator';
-import { ProductionTranslator } from '../translation/production-translator';
 import { EdgeTranslator, edgeTranslator } from '../translation/edge-translator';
 import { TranslationMapper } from '../translation/translation-mapper';
 
