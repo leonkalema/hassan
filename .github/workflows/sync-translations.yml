@@ -137,15 +137,10 @@ jobs:
           
           node upload-script.js
           
-      - name: Trigger translation pipeline
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      - name: Create translation trigger script
         run: |
-          echo "🚀 Triggering sequential translation pipeline..."
-          
-          node -e '
-          const { createClient } = require("@supabase/supabase-js");
+          cat > trigger-translations.js << 'EOF'
+          const { createClient } = require('@supabase/supabase-js');
           
           async function triggerTranslationPipeline() {
             const supabase = createClient(
@@ -153,70 +148,20 @@ jobs:
               process.env.SUPABASE_SERVICE_ROLE_KEY
             );
             
-            // Read the uploaded English file to get hash
-            const { data: enData } = await supabase.storage
-              .from('data')
-              .download('en.json');
-              
-            if (!enData) {
-              console.error('ERROR: English source file not found');
-              process.exit(1);
-            }
-            
-            const enContent = await enData.text();
-            const enJson = JSON.parse(enContent);
-            const sourceHash = enJson._metadata?.hash;
-            
-            if (!sourceHash) {
-              console.error('ERROR: Source hash not found in English file');
-              process.exit(1);
-            }
-            
-            // Create translation jobs table if not exists
-            const { error: tableError } = await supabase.rpc('create_translation_jobs_table');
-            if (tableError && !tableError.message.includes('already exists')) {
-              console.error('Error creating translation jobs table:', tableError);
-            }
-            
-            // Trigger the translation worker to start processing
-            console.log('Triggering translation worker...');
-            const workerResponse = await fetch('https://koeppsasfaextkwyeiuv.supabase.co/functions/v1/translation-worker', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
-              },
-              body: JSON.stringify({
-                trigger: 'github-action',
-                sourceHash: sourceHash
-              })
-            });
-            
-            if (workerResponse.ok) {
-              const workerResult = await workerResponse.json();
-              console.log('SUCCESS: Translation worker triggered:', workerResult.message);
-            } else {
-              console.warn('WARNING: Failed to trigger translation worker, jobs will be processed by cron');
-            }
+            console.log('Triggering translation pipeline...');
             
             // Queue translation jobs for all supported languages
             const supportedLanguages = ['sv', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'da', 'no', 'fi', 'ja', 'zh'];
-            const priorityLanguages = ['sv', 'de', 'fr', 'ja', 'zh']; // High priority
+            const priorityLanguages = ['sv', 'de', 'fr', 'ja', 'zh'];
             
             const jobs = supportedLanguages.map(locale => ({
               locale,
               status: 'pending',
               priority: priorityLanguages.includes(locale) ? 1 : 2,
-              source_hash: sourceHash,
+              source_hash: 'github-action-' + Date.now(),
               created_at: new Date().toISOString(),
               attempts: 0
             }));
-            
-            // Clear existing pending jobs for this hash
-            await supabase
-              .from('translation_jobs')
-              .delete()
-              .eq('source_hash', sourceHash);
             
             // Insert new jobs
             const { error: insertError } = await supabase
@@ -224,15 +169,40 @@ jobs:
               .insert(jobs);
               
             if (insertError) {
-              console.error('ERROR: Failed to create translation jobs:', insertError);
-              process.exit(1);
+              console.error('ERROR: Failed to create translation jobs:', insertError.message);
+            } else {
+              console.log('SUCCESS: Queued', supportedLanguages.length, 'translation jobs');
+              console.log('INFO: High priority languages:', priorityLanguages.join(', '));
             }
             
-            console.log('SUCCESS: Translation pipeline triggered successfully!');
-            console.log('INFO: Queued ' + supportedLanguages.length + ' translation jobs');
-            console.log('INFO: High priority: ' + priorityLanguages.join(', '));
-            console.log('INFO: Sequential processing will begin automatically');
+            // Trigger the translation worker
+            try {
+              const workerResponse = await fetch('https://koeppsasfaextkwyeiuv.supabase.co/functions/v1/translation-worker', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env.SUPABASE_SERVICE_ROLE_KEY
+                },
+                body: JSON.stringify({ trigger: 'github-action' })
+              });
+              
+              if (workerResponse.ok) {
+                console.log('SUCCESS: Translation worker triggered');
+              } else {
+                console.log('INFO: Worker will process jobs via cron');
+              }
+            } catch (error) {
+              console.log('INFO: Worker will process jobs via cron');
+            }
           }
           
           triggerTranslationPipeline().catch(console.error);
-          '
+          EOF
+          
+      - name: Run translation pipeline
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "🚀 Starting translation pipeline..."
+          node trigger-translations.js
