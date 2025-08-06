@@ -67,16 +67,20 @@ export default async function Home({
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-12">
               <h3 className="text-2xl font-light text-gray-800 mb-4">
-                Featured Destinations
+                {t('home.featuredTours.title')}
               </h3>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Discover our most popular travel destinations
+                {t('home.featuredDestinations.subtitle')}
               </p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
-              {featured_tours.slice(0, 3).map((tour: any, index: number) => (
-                <div key={tour.id} className="group bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+              {[
+                { key: 'alpineAdventure', duration: '7 days', price: '$2,499' },
+                { key: 'tropicalParadise', duration: '5 days', price: '$3,299' },
+                { key: 'culturalJourney', duration: '10 days', price: '$4,199' }
+              ].map((tour, index) => (
+                <div key={tour.key} className="group bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
                   <div className="aspect-w-16 aspect-h-12">
                     <img 
                       src={index === 0 ? 
@@ -85,20 +89,20 @@ export default async function Home({
                         'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' :
                         'https://cdn.midjourney.com/7ad5007a-da50-4aee-9dfb-5346dfb74737/0_3.png'
                       }
-                      alt={tour.title}
+                      alt={t(`home.featuredTours.${tour.key}.title`)}
                       className="w-full h-48 object-cover"
                     />
                   </div>
                   
                   <div className="p-6">
-                    <h4 className="text-lg font-medium text-gray-800 mb-2">{tour.title}</h4>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">{tour.description}</p>
+                    <h4 className="text-lg font-medium text-gray-800 mb-2">{t(`home.featuredTours.${tour.key}.title`)}</h4>
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">{t(`home.featuredTours.${tour.key}.description`)}</p>
                     <div className="flex items-center justify-between mb-4 text-xs text-gray-500">
                       <span>{tour.duration}</span>
-                      <span className="font-medium text-gray-800">${tour.price}</span>
+                      <span className="font-medium text-gray-800">{tour.price}</span>
                     </div>
                     <button className="w-full bg-rose-100 hover:bg-rose-200 text-gray-800 py-2 rounded-lg font-medium transition-colors">
-                      Learn More
+                      {t('home.hero.learnMore')}
                     </button>
                   </div>
                 </div>

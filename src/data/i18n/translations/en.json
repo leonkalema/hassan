@@ -52,7 +52,22 @@
     },
     "featuredTours": {
       "title": "Featured Tours",
-      "viewAll": "View All Tours"
+      "viewAll": "View All Tours",
+      "alpineAdventure": {
+        "title": "Alpine Adventure",
+        "destination": "Swiss Alps",
+        "description": "Experience breathtaking mountain views and pristine alpine lakes."
+      },
+      "tropicalParadise": {
+        "title": "Tropical Paradise",
+        "destination": "Maldives",
+        "description": "Relax in overwater bungalows with crystal clear waters."
+      },
+      "culturalJourney": {
+        "title": "Cultural Journey",
+        "destination": "Japan",
+        "description": "Immerse yourself in ancient traditions and modern wonders."
+      }
     },
     "stats": {
       "title": "Why Choose Us",
