@@ -13,14 +13,20 @@ async function testEdgeTranslation() {
 
   try {
     // Test 1: Connection test
-    console.log('1️⃣ Testing edge function connectivity...');
-    const isConnected = await edgeTranslator.testConnection();
-    console.log(`   ${isConnected ? '✅' : '❌'} Edge function ${isConnected ? 'connected' : 'not connected'}\n`);
+    console.log('1️⃣ Testing fast translation server connectivity...');
+    let isConnected = false;
+    try {
+      const testTranslation = await edgeTranslator.loadTranslation('en');
+      isConnected = testTranslation && testTranslation.meta;
+    } catch (error) {
+      isConnected = false;
+    }
+    console.log(`   ${isConnected ? '✅' : '❌'} Fast translation server ${isConnected ? 'connected' : 'not connected'}\n`);
 
     if (!isConnected) {
-      console.log('❌ Edge function not accessible. Please check:');
-      console.log('   - Edge function is deployed at: https://koeppsasfaextkwyeiuv.supabase.co/functions/v1/data');
-      console.log('   - Function code is properly pasted');
+      console.log('❌ Fast translation server not accessible. Please check:');
+      console.log('   - Edge function is deployed at: https://koeppsasfaextkwyeiuv.supabase.co/functions/v1/serve-translation');
+      console.log('   - Function code is properly deployed');
       console.log('   - Supabase storage bucket exists');
       return;
     }
@@ -50,10 +56,11 @@ async function testEdgeTranslation() {
     console.log(`   📦 Much faster than first load (${swedishTime}ms vs ${cachedTime}ms)\n`);
 
     // Test 5: Translation status
-    console.log('5️⃣ Checking translation status...');
-    const status = edgeTranslator.getTranslationStatus('sv');
-    console.log(`   📊 Swedish status: cached=${status.cached}, fresh=${status.fresh}`);
-    console.log(`   🕒 Last loaded: ${status.lastLoaded?.toISOString()}\n`);
+    console.log('5️⃣ Checking translation cache status...');
+    const hasCached = edgeTranslator.hasCachedTranslation('sv');
+    const cacheStats = edgeTranslator.getCacheStats();
+    console.log(`   📊 Swedish cached: ${hasCached}`);
+    console.log(`   📊 Cache size: ${cacheStats.size} locales: ${cacheStats.locales.join(', ')}\n`);
 
     // Test 6: Test Next.js integration
     console.log('6️⃣ Testing Next.js translation loading...');
