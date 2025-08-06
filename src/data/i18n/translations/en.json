@@ -19,17 +19,6 @@
     "destination": "Destination",
     "price": "Price"
   },
-  "nav": {
-    "home": "Home",
-    "about": "About",
-    "tours": "Tours",
-    "contact": "Contact"
-  },
-  "hero": {
-    "title": "Discover  Destinations",
-    "subtitle": "Explore the Africa and Europe with our curated world renowned travel experiences",
-    "cta": "Wishedsas To Book Now"
-  },
   "navigation": {
     "home": "Home",
     "about": "About Us",
