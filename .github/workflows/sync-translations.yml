@@ -144,8 +144,8 @@ jobs:
         run: |
           echo "🚀 Triggering sequential translation pipeline..."
           
-          node -e "
-          const { createClient } = require('@supabase/supabase-js');
+          node -e '
+          const { createClient } = require("@supabase/supabase-js");
           
           async function triggerTranslationPipeline() {
             const supabase = createClient(
@@ -235,4 +235,4 @@ jobs:
           }
           
           triggerTranslationPipeline().catch(console.error);
-          "
+          '
