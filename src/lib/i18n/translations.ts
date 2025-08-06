@@ -106,13 +106,13 @@ export async function checkTranslationStatus(locale: Locale): Promise<{
   generatedOnDemand?: boolean;
 }> {
   try {
-    // Use EdgeTranslator to get translation status
-    const status = translator.getTranslationStatus(locale);
+    // Use EdgeTranslator to load translations
     const translations = await translator.loadTranslation(locale);
-    
+    const hasCached = translator.hasCachedTranslation(locale);
+
     return {
-      exists: status.cached,
-      upToDate: status.fresh,
+      exists: hasCached,
+      upToDate: true,
       lastUpdated: translations.meta?.lastUpdated,
       generatedOnDemand: translations.meta?.generatedOnDemand
     };
