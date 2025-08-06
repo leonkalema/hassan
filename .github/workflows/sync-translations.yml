@@ -159,7 +159,7 @@ jobs:
               .download('en.json');
               
             if (!enData) {
-              console.error('❌ English source file not found');
+              console.error('ERROR: English source file not found');
               process.exit(1);
             }
             
@@ -168,7 +168,7 @@ jobs:
             const sourceHash = enJson._metadata?.hash;
             
             if (!sourceHash) {
-              console.error('❌ Source hash not found in English file');
+              console.error('ERROR: Source hash not found in English file');
               process.exit(1);
             }
             
@@ -179,7 +179,7 @@ jobs:
             }
             
             // Trigger the translation worker to start processing
-            console.log('🚀 Triggering translation worker...');
+            console.log('Triggering translation worker...');
             const workerResponse = await fetch('https://koeppsasfaextkwyeiuv.supabase.co/functions/v1/translation-worker', {
               method: 'POST',
               headers: {
@@ -194,9 +194,9 @@ jobs:
             
             if (workerResponse.ok) {
               const workerResult = await workerResponse.json();
-              console.log('✅ Translation worker triggered:', workerResult.message);
+              console.log('SUCCESS: Translation worker triggered:', workerResult.message);
             } else {
-              console.warn('⚠️ Failed to trigger translation worker, jobs will be processed by cron');
+              console.warn('WARNING: Failed to trigger translation worker, jobs will be processed by cron');
             }
             
             // Queue translation jobs for all supported languages
@@ -224,14 +224,14 @@ jobs:
               .insert(jobs);
               
             if (insertError) {
-              console.error('❌ Failed to create translation jobs:', insertError);
+              console.error('ERROR: Failed to create translation jobs:', insertError);
               process.exit(1);
             }
             
-            console.log('✅ Translation pipeline triggered successfully!');
-            console.log('📅 Queued ' + supportedLanguages.length + ' translation jobs');
-            console.log('🎆 High priority: ' + priorityLanguages.join(', '));
-            console.log('🔄 Sequential processing will begin automatically');
+            console.log('SUCCESS: Translation pipeline triggered successfully!');
+            console.log('INFO: Queued ' + supportedLanguages.length + ' translation jobs');
+            console.log('INFO: High priority: ' + priorityLanguages.join(', '));
+            console.log('INFO: Sequential processing will begin automatically');
           }
           
           triggerTranslationPipeline().catch(console.error);
