@@ -60,7 +60,7 @@ jobs:
               );
               
               // First, check if the bucket exists and create it if needed
-              console.log('📋 Checking if translations bucket exists...');
+              console.log('📋 Checking if data bucket exists...');
               const { data: buckets, error: listError } = await supabase.storage.listBuckets();
               
               if (listError) {
@@ -68,11 +68,11 @@ jobs:
                 throw listError;
               }
               
-              const translationsBucket = buckets.find(bucket => bucket.name === 'translations');
+              const dataBucket = buckets.find(bucket => bucket.name === 'data');
               
-              if (!translationsBucket) {
-                console.log('📋 Creating translations bucket...');
-                const { data: newBucket, error: createError } = await supabase.storage.createBucket('translations', {
+              if (!dataBucket) {
+                console.log('📋 Creating data bucket...');
+                const { data: newBucket, error: createError } = await supabase.storage.createBucket('data', {
                   public: false,
                   allowedMimeTypes: ['application/json'],
                   fileSizeLimit: 1024 * 1024 // 1MB
@@ -83,9 +83,9 @@ jobs:
                   throw createError;
                 }
                 
-                console.log('✅ Translations bucket created successfully');
+                console.log('✅ Data bucket created successfully');
               } else {
-                console.log('✅ Translations bucket already exists');
+                console.log('✅ Data bucket already exists');
               }
               
               // Read the English translation file
@@ -108,9 +108,9 @@ jobs:
               
               // Upload to Supabase Storage
               console.log('📤 Uploading en.json to Supabase Storage...');
-              const filePath = 'data/en.json';
+              const filePath = 'en.json';
               const { data, error } = await supabase.storage
-                .from('translations')
+                .from('data')
                 .upload(filePath, JSON.stringify(fileWithMetadata, null, 2), {
                   contentType: 'application/json',
                   upsert: true
