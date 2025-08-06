@@ -163,8 +163,17 @@ Format your response as JSON:
       throw new Error('Empty review response');
     }
 
+    // Extract JSON from markdown if present
+    let jsonText = reviewText;
+    
+    // Remove markdown code blocks if present
+    const jsonMatch = reviewText.match(/```(?:json)?\s*({[\s\S]*?})\s*```/);
+    if (jsonMatch) {
+      jsonText = jsonMatch[1];
+    }
+    
     // Parse JSON response
-    const review = JSON.parse(reviewText);
+    const review = JSON.parse(jsonText);
     return {
       score: review.score || 0,
       notes: review.notes || 'No notes provided',
