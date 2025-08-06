@@ -1,78 +1,101 @@
 import { Locale } from '../i18n/config';
 
 /**
- * Edge Function Translation Loader
- * Uses Supabase Edge Function for smart, on-demand translation generation
+ * Fast Translation Server Client
+ * Uses Supabase fast translation server for instant translation loading
  */
 export class EdgeTranslator {
-  private edgeUrl: string;
-  private cache: Map<string, any> = new Map();
-  private cacheExpiry: Map<string, number> = new Map();
-  private readonly CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+  private fastServerUrl: string;
+  private cache = new Map<string, { data: any; timestamp: number }>();
+  private readonly CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
-  constructor(edgeUrl: string = 'https://koeppsasfaextkwyeiuv.supabase.co/functions/v1/data') {
-    this.edgeUrl = edgeUrl;
+  constructor(fastServerUrl: string) {
+    this.fastServerUrl = fastServerUrl;
   }
 
   /**
-   * Load translation for a specific locale
-   * Uses smart caching and falls back to edge function generation
+   * Load translation for a specific locale from fast server
+   * Uses caching for optimal performance
    */
-  async loadTranslation(locale: Locale, force = false): Promise<any> {
+  async loadTranslation(locale: Locale, includeStatus = false): Promise<any> {
     const cacheKey = `translation_${locale}`;
     const now = Date.now();
 
-    // Check cache first (unless forcing refresh)
-    if (!force && this.cache.has(cacheKey)) {
-      const expiry = this.cacheExpiry.get(cacheKey) || 0;
-      if (now < expiry) {
-        console.log(`📦 Using cached translation for ${locale}`);
-        return this.cache.get(cacheKey);
-      }
+    // Check cache first
+    const cached = this.cache.get(cacheKey);
+    if (cached && (now - cached.timestamp) < this.CACHE_TTL) {
+      console.log(`📦 Using cached translation for ${locale}`);
+      return cached.data;
     }
 
     try {
-      console.log(`🌍 Loading translation for ${locale} from edge function...`);
+      console.log(`⚡ Loading translation for ${locale} from fast server...`);
       
-      const response = await fetch(`${this.edgeUrl}?locale=${locale}&force=${force}`, {
-        method: 'GET',
+      const response = await fetch(this.fastServerUrl, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtvZXBwc2FzZmFleHRrd3llaXV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0NzY5MDEsImV4cCI6MjA3MDA1MjkwMX0.w57n1eP117sQs9-P4jegDcCawHduZiiWh6P9jRiVRYQ'}`
-        }
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''}`
+        },
+        body: JSON.stringify({
+          locale,
+          includeStatus
+        })
       });
 
       if (!response.ok) {
-        throw new Error(`Edge function error: ${response.status} ${response.statusText}`);
+        throw new Error(`Fast server error: ${response.status} ${response.statusText}`);
       }
 
-      const data = await response.json();
+      const result = await response.json();
 
-      if (!data.success) {
-        throw new Error(data.error || 'Translation failed');
+      if (!result.success) {
+        throw new Error(result.error || 'Translation loading failed');
       }
 
-      const translation = data.translation;
-
-      // Cache the translation
-      this.cache.set(cacheKey, translation);
-      this.cacheExpiry.set(cacheKey, now + this.CACHE_DURATION);
-
-      console.log(`✅ Translation loaded for ${locale} (${data.generatedOnDemand ? 'generated' : 'cached'})`);
+      const translation = result.translation;
+      
+      // Cache the successful result
+      this.cache.set(cacheKey, {
+        data: translation,
+        timestamp: now
+      });
+      
+      console.log(`✅ Translation loaded for ${locale}`);
+      
+      // Log quality information if available
+      if (result.quality) {
+        console.log(`📊 Quality: ${result.quality.score}/100 (${result.quality.status})`);
+      }
+      
+      // Log completion status
+      if (result.translationComplete) {
+        console.log(`✅ Translation marked as complete`);
+      } else if (result.fallback) {
+        console.log(`⚠️ Using English fallback for ${locale}`);
+      }
+      
       return translation;
-
+      
     } catch (error) {
       console.error(`❌ Failed to load translation for ${locale}:`, error);
       
-      // Return fallback English translation if available
-      if (locale !== 'en' && this.cache.has('translation_en')) {
-        console.log(`🔄 Falling back to English for ${locale}`);
-        return this.cache.get('translation_en');
+      // Try to return cached version even if expired
+      const cachedTranslation = this.cache.get(cacheKey);
+      if (cachedTranslation) {
+        console.log(`🔄 Using expired cache for ${locale} due to error`);
+        return cachedTranslation.data;
       }
-
-      // Return basic fallback structure
-      return this.getFallbackTranslation(locale);
+      
+      // Final fallback: return empty object with locale info
+      return {
+        meta: {
+          locale,
+          error: true,
+          errorMessage: error instanceof Error ? error.message : 'Unknown error'
+        }
+      };
     }
   }
 
@@ -83,11 +106,11 @@ export class EdgeTranslator {
     console.log(`🔄 Force regenerating translation for ${locale}...`);
     
     try {
-      const response = await fetch(this.edgeUrl, {
+      const response = await fetch(this.fastServerUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtvZXBwc2FzZmFleHRrd3llaXV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0NzY5MDEsImV4cCI6MjA3MDA1MjkwMX0.w57n1eP117sQs9-P4jegDcCawHduZiiWh6P9jRiVRYQ'}`
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''}`
         },
         body: JSON.stringify({
           locale,
@@ -95,35 +118,17 @@ export class EdgeTranslator {
         })
       });
 
-      if (!response.ok) {
-        throw new Error(`Edge function error: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (!data.success) {
-        throw new Error(data.error || 'Translation regeneration failed');
-      }
-
-      // Update cache
-      const cacheKey = `translation_${locale}`;
-      this.cache.set(cacheKey, data.translation);
-      this.cacheExpiry.set(cacheKey, Date.now() + this.CACHE_DURATION);
-
-      console.log(`✅ Translation regenerated for ${locale}`);
-      return data.translation;
-
     } catch (error) {
       console.error(`❌ Failed to regenerate translation for ${locale}:`, error);
-      throw error;
     }
   }
 
   /**
    * Preload translations for multiple locales
+   * Useful for warming up cache
    */
   async preloadTranslations(locales: Locale[]): Promise<void> {
-    console.log(`📦 Preloading translations for: ${locales.join(', ')}`);
+    console.log(`🔥 Preloading translations for: ${locales.join(', ')}`);
     
     const promises = locales.map(locale => 
       this.loadTranslation(locale).catch(error => {
@@ -131,65 +136,62 @@ export class EdgeTranslator {
         return null;
       })
     );
-
+    
     await Promise.all(promises);
     console.log('✅ Translation preloading completed');
   }
 
   /**
-   * Get translation status for a locale
+   * Check if translation exists in cache
    */
-  getTranslationStatus(locale: Locale): {
-    cached: boolean;
-    fresh: boolean;
-    lastLoaded?: Date;
-  } {
-    const cacheKey = `translation_${locale}`;
-    const cached = this.cache.has(cacheKey);
-    const expiry = this.cacheExpiry.get(cacheKey) || 0;
-    const fresh = cached && Date.now() < expiry;
-
-    return {
-      cached,
-      fresh,
-      lastLoaded: cached ? new Date(expiry - this.CACHE_DURATION) : undefined
-    };
+  hasCachedTranslation(locale: Locale): boolean {
+    const cached = this.cache.get(`translation_${locale}`);
+    if (!cached) return false;
+    
+    const now = Date.now();
+    return (now - cached.timestamp) < this.CACHE_TTL;
   }
 
   /**
-   * Clear translation cache
+   * Clear cache for specific locale or all locales
    */
   clearCache(locale?: Locale): void {
     if (locale) {
-      const cacheKey = `translation_${locale}`;
-      this.cache.delete(cacheKey);
-      this.cacheExpiry.delete(cacheKey);
+      this.cache.delete(`translation_${locale}`);
       console.log(`🗑️ Cleared cache for ${locale}`);
     } else {
       this.cache.clear();
-      this.cacheExpiry.clear();
       console.log('🗑️ Cleared all translation cache');
     }
   }
 
   /**
-   * Test edge function connectivity
+   * Get cache statistics
    */
-  async testConnection(): Promise<boolean> {
-    try {
-      const response = await fetch(`${this.edgeUrl}?locale=en`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtvZXBwc2FzZmFleHRrd3llaXV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0NzY5MDEsImV4cCI6MjA3MDA1MjkwMX0.w57n1eP117sQs9-P4jegDcCawHduZiiWh6P9jRiVRYQ'}`
-        }
-      });
+  getCacheStats(): { size: number; locales: string[] } {
+    const locales = Array.from(this.cache.keys())
+      .map(key => key.replace('translation_', ''))
+      .sort();
+      
+    return {
+      size: this.cache.size,
+      locales
+    };
+  }
 
-      return response.ok;
-    } catch (error) {
-      console.error('Edge function connectivity test failed:', error);
-      return false;
-    }
+  /**
+   * Force refresh translation from server
+   */
+  async refreshTranslation(locale: Locale): Promise<any> {
+    this.clearCache(locale);
+    return this.loadTranslation(locale);
+  }
+
+  /**
+   * Load translation with status information
+   */
+  async loadTranslationWithStatus(locale: Locale): Promise<any> {
+    return this.loadTranslation(locale, true);
   }
 
   /**
@@ -291,5 +293,9 @@ export class EdgeTranslator {
   }
 }
 
-// Export singleton instance
-export const edgeTranslator = new EdgeTranslator();
+// Export singleton instance with fast server URL
+const FAST_SERVER_URL = process.env.NEXT_PUBLIC_SUPABASE_URL 
+  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/serve-translation`
+  : 'https://koeppsasfaextkwyeiuv.supabase.co/functions/v1/serve-translation';
+
+export const edgeTranslator = new EdgeTranslator(FAST_SERVER_URL);

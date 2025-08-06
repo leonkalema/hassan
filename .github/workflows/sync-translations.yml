@@ -137,9 +137,102 @@ jobs:
           
           node upload-script.js
           
-      - name: Success summary
+      - name: Trigger translation pipeline
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          echo "✅ Translation sync completed successfully!"
-          echo "📁 en.json uploaded to Supabase Storage"
-          echo "🔄 Other language translations will be generated on-demand"
-          echo "🌍 Your multilingual website is ready!"
+          echo "🚀 Triggering sequential translation pipeline..."
+          
+          node -e "
+          const { createClient } = require('@supabase/supabase-js');
+          
+          async function triggerTranslationPipeline() {
+            const supabase = createClient(
+              process.env.SUPABASE_URL,
+              process.env.SUPABASE_SERVICE_ROLE_KEY
+            );
+            
+            // Read the uploaded English file to get hash
+            const { data: enData } = await supabase.storage
+              .from('data')
+              .download('en.json');
+              
+            if (!enData) {
+              console.error('❌ English source file not found');
+              process.exit(1);
+            }
+            
+            const enContent = await enData.text();
+            const enJson = JSON.parse(enContent);
+            const sourceHash = enJson._metadata?.hash;
+            
+            if (!sourceHash) {
+              console.error('❌ Source hash not found in English file');
+              process.exit(1);
+            }
+            
+            // Create translation jobs table if not exists
+            const { error: tableError } = await supabase.rpc('create_translation_jobs_table');
+            if (tableError && !tableError.message.includes('already exists')) {
+              console.error('Error creating translation jobs table:', tableError);
+            }
+            
+            // Trigger the translation worker to start processing
+            console.log('🚀 Triggering translation worker...');
+            const workerResponse = await fetch('https://koeppsasfaextkwyeiuv.supabase.co/functions/v1/translation-worker', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
+              },
+              body: JSON.stringify({
+                trigger: 'github-action',
+                sourceHash: sourceHash
+              })
+            });
+            
+            if (workerResponse.ok) {
+              const workerResult = await workerResponse.json();
+              console.log('✅ Translation worker triggered:', workerResult.message);
+            } else {
+              console.warn('⚠️ Failed to trigger translation worker, jobs will be processed by cron');
+            }
+            
+            // Queue translation jobs for all supported languages
+            const supportedLanguages = ['sv', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'da', 'no', 'fi', 'ja', 'zh'];
+            const priorityLanguages = ['sv', 'de', 'fr', 'ja', 'zh']; // High priority
+            
+            const jobs = supportedLanguages.map(locale => ({
+              locale,
+              status: 'pending',
+              priority: priorityLanguages.includes(locale) ? 1 : 2,
+              source_hash: sourceHash,
+              created_at: new Date().toISOString(),
+              attempts: 0
+            }));
+            
+            // Clear existing pending jobs for this hash
+            await supabase
+              .from('translation_jobs')
+              .delete()
+              .eq('source_hash', sourceHash);
+            
+            // Insert new jobs
+            const { error: insertError } = await supabase
+              .from('translation_jobs')
+              .insert(jobs);
+              
+            if (insertError) {
+              console.error('❌ Failed to create translation jobs:', insertError);
+              process.exit(1);
+            }
+            
+            console.log('✅ Translation pipeline triggered successfully!');
+            console.log('📅 Queued ' + supportedLanguages.length + ' translation jobs');
+            console.log('🎆 High priority: ' + priorityLanguages.join(', '));
+            console.log('🔄 Sequential processing will begin automatically');
+          }
+          
+          triggerTranslationPipeline().catch(console.error);
+          "
