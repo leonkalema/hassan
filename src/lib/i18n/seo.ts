@@ -59,7 +59,17 @@ export async function generateI18nMetadata(
     },
     
     // Robots
-    robots: seoData.robots,
+    robots: {
+      index: seoData.robots.index,
+      follow: seoData.robots.follow,
+      googleBot: {
+        index: seoData.robots.googleBot.index,
+        follow: seoData.robots.googleBot.follow,
+        'max-video-preview': seoData.robots.googleBot['max-video-preview'],
+        'max-image-preview': 'large' as const,
+        'max-snippet': seoData.robots.googleBot['max-snippet']
+      }
+    },
     
     // Verification
     verification: {
