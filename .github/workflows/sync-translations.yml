@@ -51,20 +51,41 @@ jobs:
           async function uploadTranslation() {
             try {
               console.log('🚀 Starting translation sync to Supabase Storage...');
-              
-              // Check if environment variables exist
-              if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-                throw new Error('Missing required environment variables');
-              }
+              console.log('SUPABASE_URL:', process.env.SUPABASE_URL ? 'Set' : 'Missing');
+              console.log('SERVICE_KEY:', process.env.SUPABASE_SERVICE_ROLE_KEY ? 'Set' : 'Missing');
               
               const supabase = createClient(
                 process.env.SUPABASE_URL,
                 process.env.SUPABASE_SERVICE_ROLE_KEY
               );
               
-              // Check if file exists
-              if (!fs.existsSync('src/data/i18n/translations/en.json')) {
-                throw new Error('en.json file not found');
+              // First, check if the bucket exists and create it if needed
+              console.log('📋 Checking if translations bucket exists...');
+              const { data: buckets, error: listError } = await supabase.storage.listBuckets();
+              
+              if (listError) {
+                console.error('Error listing buckets:', listError);
+                throw listError;
+              }
+              
+              const translationsBucket = buckets.find(bucket => bucket.name === 'translations');
+              
+              if (!translationsBucket) {
+                console.log('📋 Creating translations bucket...');
+                const { data: newBucket, error: createError } = await supabase.storage.createBucket('translations', {
+                  public: false,
+                  allowedMimeTypes: ['application/json'],
+                  fileSizeLimit: 1024 * 1024 // 1MB
+                });
+                
+                if (createError) {
+                  console.error('Error creating bucket:', createError);
+                  throw createError;
+                }
+                
+                console.log('✅ Translations bucket created successfully');
+              } else {
+                console.log('✅ Translations bucket already exists');
               }
               
               // Read the English translation file
@@ -86,7 +107,8 @@ jobs:
               };
               
               // Upload to Supabase Storage
-              const filePath = 'translations/en.json';
+              console.log('📤 Uploading en.json to Supabase Storage...');
+              const filePath = 'en.json';
               const { data, error } = await supabase.storage
                 .from('translations')
                 .upload(filePath, JSON.stringify(fileWithMetadata, null, 2), {
@@ -105,6 +127,7 @@ jobs:
               
             } catch (error) {
               console.error('💥 Upload failed:', error.message);
+              console.error('Full error:', error);
               process.exit(1);
             }
           }
